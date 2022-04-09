@@ -1,0 +1,22 @@
+{
+  "name": "xlorem-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cross-fetch": "^3.1.5",
+    "express": "^4.17.3",
+    "node-fetch": "^3.2.3",
+    "xlorem": "^0.0.3-alpha.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

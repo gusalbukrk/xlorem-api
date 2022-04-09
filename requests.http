@@ -1,0 +1,26 @@
+GET http://localhost:8888/friends%20tv%20show/
+
+###
+
+GET http://localhost:8888/friends%20tv%20show/paragraphs
+
+###
+
+GET http://localhost:8888/friends%20tv%20show/words
+
+###
+
+GET http://localhost:8888/friends%20tv%20show/paragraphs/3
+
+###
+GET http://localhost:8888/friends%20tv%20show/words/100
+
+###
+
+# error = quantity of words is too low
+GET http://localhost:8888/friends%20tv%20show/words/10
+
+###
+
+# error = quantity of paragraphs is too low
+GET http://localhost:8888/friends%20tv%20show/paragraphs/0
