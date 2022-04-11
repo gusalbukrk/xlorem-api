@@ -5,16 +5,32 @@ import './fetch-polyfill.js';
 
 const app = express();
 
-app.get('/:query/:unit?/:quantity?', async (req, res) => {
-  const { query, unit, quantity } = req.params;
+function generateOptions(input) {
+  const { unit, quantity, format } = input;
 
-  const article = await xlorem(query, {
-    // unit,
-    // quantity: Number(quantity),
-
+  return {
     ...(unit !== undefined && { unit }),
-    ...(quantity !== undefined && { quantity: Number(quantity), }),
-  });
+    ...(quantity !== undefined && { quantity: Number(quantity) }),
+    ...(format !== undefined && { format }),
+  };
+}
+
+// input type must be path parameters or query strings; a mix of these two shouldn't be accepted
+// make sure that is nothing inside `req.params`, otherwise throw error
+app.get('/', async (req, res) => {
+  const article = await xlorem(
+    req.query.query,
+    generateOptions(req.query),
+  );
+
+  res.status(200).json(article);
+});
+
+app.get('/:query/:unit?/:quantity?/:format?', async (req, res) => {
+  const article = await xlorem(
+    req.params.query,
+    generateOptions(req.params)
+  );
 
   res.status(200).json(article);
 });

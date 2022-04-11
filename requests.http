@@ -1,4 +1,4 @@
-GET http://localhost:8888/friends%20tv%20show/
+GET http://localhost:8888/friends%20tv%20show
 
 ###
 
@@ -24,3 +24,24 @@ GET http://localhost:8888/friends%20tv%20show/words/10
 
 # error = quantity of paragraphs is too low
 GET http://localhost:8888/friends%20tv%20show/paragraphs/0
+
+###
+
+GET http://localhost:8888/friends%20tv%20show/paragraphs/2/html
+
+###
+
+GET http://localhost:8888/friends%20tv%20show/paragraphs/4/plain
+
+###
+
+# error: unknown format argument
+GET http://localhost:8888/friends%20tv%20show/paragraphs/3/foo
+
+###
+
+GET http://localhost:8888/?query=friends%20tv%20show
+
+###
+
+GET http://localhost:8888/?query=friends%20tv%20show&quantity=3&format=html
