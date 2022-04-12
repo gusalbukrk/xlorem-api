@@ -45,3 +45,19 @@ GET http://localhost:8888/?query=friends%20tv%20show
 ###
 
 GET http://localhost:8888/?query=friends%20tv%20show&quantity=3&format=html
+
+###
+
+GET http://localhost:8888/
+content-type: application/json
+
+{
+    "query": "harry potter",
+    "unit": "words",
+    "quantity": 100,
+    "format": "html"
+}
+
+###
+
+

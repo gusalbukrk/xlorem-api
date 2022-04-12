@@ -5,6 +5,8 @@ import './fetch-polyfill.js';
 
 const app = express();
 
+app.use(express.json()) // for parsing body of type application/json
+
 function generateOptions(input) {
   const { unit, quantity, format } = input;
 
@@ -15,12 +17,15 @@ function generateOptions(input) {
   };
 }
 
-// input type must be path parameters or query strings; a mix of these two shouldn't be accepted
+// input type must be path parameters, query & body strings; a mix of these two shouldn't be accepted
 // make sure that is nothing inside `req.params`, otherwise throw error
+
 app.get('/', async (req, res) => {
+  const obj = req.query.query ? req.query : req.body; // prefer `query` over `body`
+
   const article = await xlorem(
-    req.query.query,
-    generateOptions(req.query),
+    obj.query,
+    generateOptions(obj),
   );
 
   res.status(200).json(article);
