@@ -47,7 +47,7 @@ GET http://localhost:8888/?query=friends%20tv%20show
 GET http://localhost:8888/?query=friends%20tv%20show&quantity=3&format=html
 
 ###
-
+wordsPerSentenceMin
 GET http://localhost:8888/
 content-type: application/json
 
@@ -60,4 +60,23 @@ content-type: application/json
 
 ###
 
+GET http://localhost:8888/friends%20tv%20show/paragraphs/2/html/4/12/7/20
 
+###
+
+GET http://localhost:8888/?query=friends%20tv%20show&quantity=3&format=html&sentencesPerParagraphMin=4&sentencesPerParagraphMax=12&wordsPerSentenceMin=7&wordsPerSentenceMax=20
+
+###
+
+GET http://localhost:8888/
+content-type: application/json
+
+{
+    "query": "harry potter",
+    "quantity": 3,
+    "format": "html",
+        "sentencesPerParagraphMin": 4,
+        "sentencesPerParagraphMax": 12,
+        "wordsPerSentenceMin": 7,
+        "wordsPerSentenceMax": 20
+}

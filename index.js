@@ -8,12 +8,26 @@ const app = express();
 app.use(express.json()) // for parsing body of type application/json
 
 function generateOptions(input) {
-  const { unit, quantity, format } = input;
-
+  const { 
+    unit,
+    quantity,
+    format,
+    sentencesPerParagraphMin,
+    sentencesPerParagraphMax,
+    wordsPerSentenceMin,
+    wordsPerSentenceMax
+  } = input;
+  
   return {
     ...(unit !== undefined && { unit }),
     ...(quantity !== undefined && { quantity: Number(quantity) }),
     ...(format !== undefined && { format }),
+    requirements: Object.entries({
+      ...(sentencesPerParagraphMin !== undefined && { sentencesPerParagraphMin }),
+      ...(sentencesPerParagraphMax !== undefined && { sentencesPerParagraphMax }),
+      ...(wordsPerSentenceMin !== undefined && { wordsPerSentenceMin }),
+      ...(wordsPerSentenceMax !== undefined && { wordsPerSentenceMax }),
+    }).reduce((acc, cur) => { acc[cur[0]] = Number(cur[1]); return acc; }, {}),
   };
 }
 
@@ -31,7 +45,9 @@ app.get('/', async (req, res) => {
   res.status(200).json(article);
 });
 
-app.get('/:query/:unit?/:quantity?/:format?', async (req, res) => {
+app.get(
+  '/:query/:unit?/:quantity?/:format?/:sentencesPerParagraphMin?/:sentencesPerParagraphMax?/:wordsPerSentenceMin?/:wordsPerSentenceMax?',
+  async (req, res) => {
   const article = await xlorem(
     req.params.query,
     generateOptions(req.params)
