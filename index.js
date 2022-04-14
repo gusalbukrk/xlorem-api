@@ -35,11 +35,18 @@ function generateOptions(input) {
 // make sure that is nothing inside `req.params`, otherwise throw error
 
 app.get('/', async (req, res) => {
-  const obj = req.query.query ? req.query : req.body; // prefer `query` over `body`
+  const obj = Object.entries(req.query.query ? req.query : req.body).reduce((acc, cur) => {
+    const [ k, v ] = cur;
+    
+    if (k === 'requirements') return { ...v, ...acc };
+    
+    acc[k] = v;
+    return acc;
+  }, {});
 
   const article = await xlorem(
     obj.query,
-    generateOptions(obj),
+    generateOptions({ ...obj, ...obj.requirements }),
   );
 
   res.status(200).json(article);

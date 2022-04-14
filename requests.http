@@ -75,8 +75,25 @@ content-type: application/json
     "query": "harry potter",
     "quantity": 3,
     "format": "html",
+    "sentencesPerParagraphMin": 4,
+    "sentencesPerParagraphMax": 1200,
+    "wordsPerSentenceMin": 7,
+    "wordsPerSentenceMax": 20
+}
+
+###
+
+GET http://localhost:8888/
+content-type: application/json
+
+{
+    "query": "harry potter",
+    "quantity": 3,
+    "format": "html",
+    "requirements": {
         "sentencesPerParagraphMin": 4,
-        "sentencesPerParagraphMax": 12,
+        "sentencesPerParagraphMax": 1200,
         "wordsPerSentenceMin": 7,
         "wordsPerSentenceMax": 20
+    }
 }
