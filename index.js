@@ -34,6 +34,8 @@ function generateOptions(input) {
 // input type must be path parameters, query & body strings; a mix of these two shouldn't be accepted
 // make sure that is nothing inside `req.params`, otherwise throw error
 
+// NOTE: `query` parameter is required
+// test: http://localhost:8888/?query=mad%20men
 app.get('/', async (req, res) => {
   const obj = Object.entries(req.query.query ? req.query : req.body).reduce((acc, cur) => {
     const [ k, v ] = cur;
@@ -52,6 +54,8 @@ app.get('/', async (req, res) => {
   res.status(200).json(article);
 });
 
+// parameter `query` is required
+// test: http://localhost:8888/lord%20of%20the%20rings
 app.get(
   '/:query/:unit?/:quantity?/:format?/:sentencesPerParagraphMin?/:sentencesPerParagraphMax?/:wordsPerSentenceMin?/:wordsPerSentenceMax?',
   async (req, res) => {
