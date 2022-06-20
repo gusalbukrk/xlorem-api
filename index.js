@@ -1,7 +1,10 @@
 import express from 'express';
 import xlorem from 'xlorem';
 
-import './fetch-polyfill.js';
+// must be polyfill instead of ponyfill
+// because fetch will be used in imported module `xlorem`, not in this file
+// `import 'cross-fetch';` won't work because it imports ponyfill 
+import 'cross-fetch/dist/node-polyfill.js';
 
 const app = express();
 
